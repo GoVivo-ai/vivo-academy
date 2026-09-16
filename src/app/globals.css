@@ -1,26 +1,230 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:is(.dark *));
+
+/* ----------------------------------------------------------------------------
+   Marca Vivo — fuente de verdad: github.com/fjimenez9169/vivo-design-system
+   tokens/colors.json · tokens/typography.json
+   Navy = texto y anclas oscuras · Green = CTAs e interacción · Yellow = énfasis
+   puntual. El color dominante de la interfaz es el GRIS NEUTRO, no el azul.
+   ---------------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paleta oficial (tokens/colors.json) */
+  --brand-navy: #011640;
+  --brand-green: #04d98b;
+  --brand-yellow: #f2e205;
+  --brand-white: #ffffff;
+
+  /* Derivados de la paleta oficial (sombras/estados, no colores nuevos) */
+  --brand-navy-700: #0b2a6b;
+  --brand-navy-900: #010d28;
+  --brand-green-600: #03a86c;
+  --brand-gold: #c9b900; /* amarillo oscurecido para leerse sobre blanco */
+
+  /* Escala neutra — el color dominante de la UI.
+     Gris casi puro (2-4% de saturación): acompaña al navy sin teñir de azul. */
+  --gray-25: #fbfbfc;
+  --gray-50: #f6f6f8;
+  --gray-100: #eeeef1;
+  --gray-200: #e3e3e8;
+  --gray-300: #cfd0d7;
+  --gray-400: #a3a5af;
+  --gray-500: #767883;
+  --gray-600: #585a64;
+  --gray-700: #42444d;
+  --gray-800: #2b2d34;
+  --gray-900: #1a1b20;
+  --gray-950: #121317;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-nunito-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-nunito);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-white: var(--brand-white);
+  --color-brand-navy-700: var(--brand-navy-700);
+  --color-brand-navy-900: var(--brand-navy-900);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-600: var(--brand-green-600);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-gold: var(--brand-gold);
+  --color-gray-25: var(--gray-25);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+  --color-gray-950: var(--gray-950);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------- Capa semántica (light) ----------
+   Superficies y bordes en gris neutro; el navy vive en el texto y en anclas
+   puntuales; el verde es el color de acción (tokens/colors.json: "CTAs,
+   highlights, interactive elements"). */
+:root {
+  --background: var(--gray-50);
+  --foreground: var(--brand-navy);
+  --card: var(--brand-white);
+  --card-foreground: var(--brand-navy);
+  --popover: var(--brand-white);
+  --popover-foreground: var(--brand-navy);
+  --primary: var(--brand-green);
+  --primary-foreground: var(--brand-navy);
+  --secondary: var(--gray-100);
+  --secondary-foreground: var(--brand-navy);
+  --muted: var(--gray-100);
+  --muted-foreground: var(--gray-600);
+  --accent: var(--gray-100);
+  --accent-foreground: var(--brand-navy);
+  --destructive: #e11d48;
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  --ring: var(--brand-green);
+  --chart-1: var(--brand-navy);
+  --chart-2: var(--brand-green);
+  --chart-3: var(--brand-yellow);
+  --chart-4: var(--gray-400);
+  --chart-5: var(--brand-green-600);
+  --radius: 0.875rem;
+  /* Sidebar: la única superficie navy grande. Es el ancla de marca, no el tono
+     de fondo de la app — el resto de la interfaz queda en gris neutro. */
+  --sidebar: var(--brand-navy);
+  --sidebar-foreground: var(--brand-white);
+  --sidebar-primary: var(--brand-green);
+  --sidebar-primary-foreground: var(--brand-navy);
+  --sidebar-accent: rgba(255, 255, 255, 0.08);
+  --sidebar-accent-foreground: var(--brand-white);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--brand-green);
+}
+
+/* ---------- Capa semántica (dark) ----------
+   Neutros oscuros, no azules: evita el "todo azul" en modo oscuro. */
+.dark {
+  --background: var(--gray-950);
+  --foreground: var(--gray-50);
+  --card: var(--gray-900);
+  --card-foreground: var(--gray-50);
+  --popover: var(--gray-900);
+  --popover-foreground: var(--gray-50);
+  --primary: var(--brand-green);
+  --primary-foreground: var(--brand-navy);
+  --secondary: var(--gray-800);
+  --secondary-foreground: var(--gray-50);
+  --muted: var(--gray-800);
+  --muted-foreground: var(--gray-400);
+  --accent: var(--gray-800);
+  --accent-foreground: var(--gray-50);
+  --destructive: #fb7185;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: var(--brand-green);
+  --chart-1: var(--brand-green);
+  --chart-2: var(--brand-yellow);
+  --chart-3: var(--brand-white);
+  --chart-4: var(--gray-400);
+  --chart-5: var(--brand-green-600);
+  --sidebar: var(--brand-navy-900);
+  --sidebar-foreground: var(--gray-50);
+  --sidebar-primary: var(--brand-green);
+  --sidebar-primary-foreground: var(--brand-navy);
+  --sidebar-accent: rgba(255, 255, 255, 0.08);
+  --sidebar-accent-foreground: var(--gray-50);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--brand-green);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+  }
+  /* Jerarquía tipográfica del Design System (tokens/typography.json):
+       level-01 titular .... Nunito Bold          → font-heading font-bold
+       level-02 apoyo ...... Nunito Sans SemiBold → font-semibold
+       level-03 cuerpo ..... Nunito Sans Regular  → por defecto en <html>
+       level-04 etiqueta ... Nunito Sans Bold     → font-sans font-bold
+     Nunito es la familia de display: titulares y cifras grandes. Las etiquetas
+     pequeñas (badges, chips, uppercase) van en Nunito Sans, no en Nunito. */
+  h1, h2, h3, h4 {
+    @apply font-heading font-bold tracking-tight;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Degradado del logo: verde → amarillo */
+  .bg-brand-swoosh {
+    background-image: linear-gradient(90deg, var(--brand-green) 0%, var(--brand-yellow) 100%);
+  }
+  /* Degradado de marca: azul → verde (como el logotipo) */
+  .bg-brand-hero {
+    background-image: linear-gradient(120deg, var(--brand-navy) 0%, var(--brand-navy-700) 45%, var(--brand-green-600) 80%, var(--brand-green) 100%);
+  }
+  .text-brand-gradient {
+    background-image: linear-gradient(90deg, var(--brand-green), var(--brand-yellow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
