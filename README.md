@@ -69,9 +69,12 @@ para código. Antes de tocar color, tipografía o logo, mira el repo.
 
 Reglas de proporción, acordadas con marca:
 
-- **El color dominante de la interfaz es el gris neutro** (`--gray-*` en
+- **En modo claro el color dominante es el gris neutro** (`--gray-*` en
   `src/app/globals.css`), no el azul. El azul cansa la vista cuando se usa como
-  fondo general; es un ancla, no un tono de fondo.
+  fondo general; ahí es un ancla, no un tono de fondo.
+- **En modo oscuro las superficies son navy** (`--navy-*`), no un negro neutro:
+  el Design System le asigna al navy los *dark backgrounds*. La regla del gris
+  dominante aplica solo a la interfaz clara.
 - El **verde es el color de acción**: `--primary`, estado activo de navegación,
   CTAs. Todo estado "activo/seleccionado" de la app es verde.
 - El **navy** vive en el texto, en el sidebar y en los héroes (portada de curso,

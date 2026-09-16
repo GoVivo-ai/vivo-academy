@@ -19,10 +19,23 @@
   --brand-white: #ffffff;
 
   /* Derivados de la paleta oficial (sombras/estados, no colores nuevos) */
-  --brand-navy-700: #0b2a6b;
-  --brand-navy-900: #010d28;
   --brand-green-600: #03a86c;
   --brand-gold: #c9b900; /* amarillo oscurecido para leerse sobre blanco */
+
+  /* Rampa de navy para superficies oscuras. El Design System le asigna al navy
+     los "dark backgrounds": en modo oscuro las superficies son azules, no
+     grises. La regla del gris dominante aplica a la interfaz clara. */
+  --navy-950: #01091d;
+  --navy-900: #010d28;
+  --navy-800: #041a42;
+  --navy-700: #0a2757;
+  --navy-600: #0b2a6b;
+  --navy-fg: #eef2fa;
+  --navy-fg-muted: #93a4c6;
+
+  /* Alias heredados (los usan algunos componentes) */
+  --brand-navy-700: var(--navy-600);
+  --brand-navy-900: var(--navy-900);
 
   /* Escala neutra — el color dominante de la UI.
      Gris casi puro (2-4% de saturación): acompaña al navy sin teñir de azul. */
@@ -95,6 +108,11 @@
   --color-gray-800: var(--gray-800);
   --color-gray-900: var(--gray-900);
   --color-gray-950: var(--gray-950);
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -146,22 +164,24 @@
 }
 
 /* ---------- Capa semántica (dark) ----------
-   Neutros oscuros, no azules: evita el "todo azul" en modo oscuro. */
+   Superficies en navy: el Design System asigna al navy los "dark backgrounds",
+   así que en oscuro la marca es azul, no un negro neutro. El verde sigue siendo
+   el color de acción y el amarillo el acento. */
 .dark {
-  --background: var(--gray-950);
-  --foreground: var(--gray-50);
-  --card: var(--gray-900);
-  --card-foreground: var(--gray-50);
-  --popover: var(--gray-900);
-  --popover-foreground: var(--gray-50);
+  --background: var(--navy-900);
+  --foreground: var(--navy-fg);
+  --card: var(--navy-800);
+  --card-foreground: var(--navy-fg);
+  --popover: var(--navy-800);
+  --popover-foreground: var(--navy-fg);
   --primary: var(--brand-green);
   --primary-foreground: var(--brand-navy);
-  --secondary: var(--gray-800);
-  --secondary-foreground: var(--gray-50);
-  --muted: var(--gray-800);
-  --muted-foreground: var(--gray-400);
-  --accent: var(--gray-800);
-  --accent-foreground: var(--gray-50);
+  --secondary: var(--navy-700);
+  --secondary-foreground: var(--navy-fg);
+  --muted: var(--navy-700);
+  --muted-foreground: var(--navy-fg-muted);
+  --accent: var(--navy-700);
+  --accent-foreground: var(--navy-fg);
   --destructive: #fb7185;
   --border: rgba(255, 255, 255, 0.1);
   --input: rgba(255, 255, 255, 0.14);
@@ -169,14 +189,15 @@
   --chart-1: var(--brand-green);
   --chart-2: var(--brand-yellow);
   --chart-3: var(--brand-white);
-  --chart-4: var(--gray-400);
+  --chart-4: var(--navy-fg-muted);
   --chart-5: var(--brand-green-600);
-  --sidebar: var(--brand-navy-900);
-  --sidebar-foreground: var(--gray-50);
+  /* El rail va más oscuro que el fondo para seguir anclando la navegación. */
+  --sidebar: var(--navy-950);
+  --sidebar-foreground: var(--navy-fg);
   --sidebar-primary: var(--brand-green);
   --sidebar-primary-foreground: var(--brand-navy);
   --sidebar-accent: rgba(255, 255, 255, 0.08);
-  --sidebar-accent-foreground: var(--gray-50);
+  --sidebar-accent-foreground: var(--navy-fg);
   --sidebar-border: rgba(255, 255, 255, 0.1);
   --sidebar-ring: var(--brand-green);
 }
